@@ -172,6 +172,7 @@ namespace エンジン
 			if (キャスト可能？(it->second, 種類)) {
 				return it->second;
 			}
+			it++;
 		}
 
 		return nullptr;
