@@ -119,14 +119,15 @@ namespace エンジン
 	}
 
 
-	const std::type_info& エンティティサービス::型情報取得(種類 種類)
+	bool エンティティサービス::キャスト可能？(エンティティ* インスタンス, 種類 種類)
 	{
 		switch (種類) {
-		case 種類::プレイヤー: return typeid(プレイヤー・エンティティ);
-		case 種類::ステージ１: return typeid(ステージ１・エンティティ);
-		case 種類::ザコ１:     return typeid(ザコ１・エンティティ);
-		default:return typeid(int);
+		case 種類::プレイヤー: return nullptr != dynamic_cast<const プレイヤー・エンティティ*>(インスタンス);
+		case 種類::ステージ１: return nullptr != dynamic_cast<const ステージ１・エンティティ*>(インスタンス);
+		case 種類::ザコ１:     return nullptr != dynamic_cast<const ザコ１・エンティティ*>(インスタンス);
+		default:return false; // おかしな種類が指定された
 		}
+		return false;
 	}
 
 	int エンティティサービス::追加(種類 種類)
@@ -163,13 +164,12 @@ namespace エンジン
 		return エンティティマップ_[ハンドル];
 	}
 
+
 	エンティティ* エンティティサービス::最初のエンティティ検索(種類 種類)
 	{
-		const std::type_info& 型情報 = エンティティサービス::型情報取得(種類);
-
 		auto it = エンティティマップ_.begin();
 		while (it != エンティティマップ_.end()) {
-			if (typeid(*it->second) == 型情報) {
+			if (キャスト可能？(it->second, 種類)) {
 				return it->second;
 			}
 		}

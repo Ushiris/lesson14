@@ -232,7 +232,7 @@ namespace エンジン
 		int エンティティID_ = 0;
 		std::unordered_map<int, エンティティ*> エンティティマップ_;
 
-		static const std::type_info& 型情報取得(種類 種類);
+		static bool キャスト可能？(エンティティ* インスタンス, 種類 種類);
 		int 全削除();
 	public:
 		エンティティサービス();
