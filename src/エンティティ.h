@@ -59,8 +59,7 @@ namespace エンジン
 		friend エンティティサービス;
 
 	private:
-		TCHAR *分類名 = L"なし";
-		TCHAR *名前_= L"コンポーネント";
+		TCHAR *名前_ = L"なし";
 	protected:
 		static システムサービス* システムサービス_;
 		エンティティ& 親_;
@@ -124,6 +123,18 @@ namespace エンジン
 		int 追加(弾丸サービス::種類 種類, float2 位置, float2 速度) { return 弾丸_.追加(種類, 位置, 速度); }
 
 		void 更新(float 経過時間) {};
+	};
+
+	class CircleTrigger final : public コンポーネント
+	{
+	private:
+		TCHAR* 名前_ = L"CircleTrigger";
+		float2 pos = { 0,0 };
+		int r = 1;
+
+	public:
+
+
 	};
 
 
