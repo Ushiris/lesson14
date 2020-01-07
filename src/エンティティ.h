@@ -133,9 +133,7 @@ namespace エンジン
 		int r = 1;
 
 	public:
-		CircleTrigger(エンティティ& 親) :コンポーネント(親) {}
-		~CircleTrigger() {}
-		void 更新(float 経過時間) {};
+
 
 	};
 
