@@ -26,6 +26,7 @@ namespace エンジン
 		if (_tcscmp(L"スプライトコンポーネント", 名前) == 0) { return nullptr != dynamic_cast<const スプライトコンポーネント*>(インスタンス); }
 		if (_tcscmp(L"入力コンポーネント", 名前) == 0) { return nullptr != dynamic_cast<const 入力コンポーネント*>(インスタンス); }
 		if (_tcscmp(L"弾丸コンポーネント", 名前) == 0) { return nullptr != dynamic_cast<const 弾丸コンポーネント*>(インスタンス); }
+		if (_tcscmp(L"CircleTrigger", 名前) == 0) { return nullptr != dynamic_cast<const CircleTrigger*>(インスタンス); }
 
 		return false;
 	}
@@ -40,6 +41,7 @@ namespace エンジン
 			{ L"スプライトコンポーネント",   [](エンティティ& 親) { return (コンポーネント*)(new スプライトコンポーネント(親)); } },
 			{ L"入力コンポーネント",         [](エンティティ& 親) { return (コンポーネント*)(new 入力コンポーネント(親)); } },
 			{ L"弾丸コンポーネント",         [](エンティティ& 親) { return (コンポーネント*)(new 弾丸コンポーネント(親)); } },
+			{ L"CircleTrigger",				 [](エンティティ& 親) { return (コンポーネント*)(new CircleTrigger(親)); } },
 		};
 
 		for(const auto &c : 対応表)
