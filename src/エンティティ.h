@@ -59,6 +59,7 @@ namespace エンジン
 		friend エンティティサービス;
 
 	private:
+		TCHAR *分類名 = L"なし";
 		TCHAR *名前_= L"コンポーネント";
 	protected:
 		static システムサービス* システムサービス_;
