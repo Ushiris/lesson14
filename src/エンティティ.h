@@ -129,11 +129,13 @@ namespace エンジン
 	{
 	private:
 		TCHAR* 名前_ = L"CircleTrigger";
+		static std::vector<CircleTrigger*> collider;
+		int layer = 0;
 		float2 pos = { 0,0 };
 		int r = 1;
 
 	public:
-		CircleTrigger(エンティティ& 親) : コンポーネント(親) {}
+		CircleTrigger(エンティティ& 親) : コンポーネント(親) { collider.push_back(this); }
 		~CircleTrigger() {}
 
 		void 更新(float 経過時間);
@@ -142,6 +144,7 @@ namespace エンジン
 		int getR();
 
 		bool collision(CircleTrigger another);
+		bool isCollision();
 	};
 
 

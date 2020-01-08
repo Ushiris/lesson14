@@ -221,7 +221,7 @@ namespace エンジン
 
 	void CircleTrigger::更新(float 経過時間)
 	{
-
+		
 	};
 
 	float2 CircleTrigger::getPos()
@@ -244,6 +244,17 @@ namespace エンジン
 			return true;
 		}
 
+		return false;
+	}
+	bool CircleTrigger::isCollision()
+	{
+		for (auto another : collider)
+		{
+			if (collision(*another))
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 }
