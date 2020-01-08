@@ -87,6 +87,8 @@ namespace エンジン
 			追加(temp);
 			temp->setBulletMode(&位置_);
 		}
+
+		for(int i=0;i<)
 	}
 
 	void プレイヤー・エンティティ::描画()

@@ -21,14 +21,15 @@ namespace エンジン {
 	private:
 		unsigned int リソースID_ = 0;
 		float2 半サイズ_ = {0.0f, 0.0f};// 幅と高さの半分
-		unsigned int 最大数_ = 0;
 		unsigned int 個数_ = 0;
+		unsigned int r = 0;
 
-		弾丸データ* データ配列_ = nullptr;
 
 		static bool 画面外？(float2 位置, float2 サイズ, float2 画面サイズ);
 
 	public:
+		unsigned int 最大数_ = 0;
+		弾丸データ* データ配列_ = nullptr;
 		弾丸() {}
 		~弾丸() {}
 
@@ -64,7 +65,7 @@ namespace エンジン {
 		int 追加(弾丸サービス::種類 種類, float2 位置, float2 速度);
 		void 更新(float 経過時間);
 		void 描画();
-
+		弾丸 getEnemyBullet();
 	};
 
 }// namespace エンジン

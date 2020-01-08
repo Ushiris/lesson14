@@ -112,16 +112,9 @@ namespace エンジン
 
 	class CircleTrigger final : public コンポーネント
 	{
-	private:
-		TCHAR* 名前_ = L"CircleTrigger";
-		static std::vector<CircleTrigger*> collider;
-		int layer = 0;
-		float2 *pos;
-		int r = 1;
-		bool isBullet = false;
 
 	public:
-		CircleTrigger(エンティティ& 親) : コンポーネント(親) { collider.push_back(this); }
+		CircleTrigger(エンティティ& 親) : コンポーネント(親) { }
 		~CircleTrigger() {}
 
 		void 更新(float 経過時間);
@@ -133,6 +126,13 @@ namespace エンジン
 
 		bool collision(CircleTrigger another);
 		bool isCollision();
+
+	private:
+		TCHAR* 名前_ = L"CircleTrigger";
+		int layer = 0;
+		float2 *pos;
+		int r = 1;
+		bool isBullet = false;
 	};
 
 	class 弾丸コンポーネント final : public コンポーネント
@@ -146,7 +146,7 @@ namespace エンジン
 		~弾丸コンポーネント() {}
 
 		int 追加(弾丸サービス::種類 種類, float2 位置, float2 速度) { return 弾丸_.追加(種類, 位置, 速度); }
-
+		std::vector<float2> getAllEnemyBullets();
 		void 更新(float 経過時間) {};
 	};
 

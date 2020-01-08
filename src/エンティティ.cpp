@@ -262,13 +262,15 @@ namespace エンジン
 	}
 	bool CircleTrigger::isCollision()
 	{
-		for (auto another : collider)
-		{
-			if (collision(*another)||another->layer!=layer)
-			{
-				return true;
-			}
-		}
 		return false;
+	}
+	std::vector<float2> 弾丸コンポーネント::getAllEnemyBullets()
+	{
+		std::vector<float2> data;
+		for (int i = 0; i < 弾丸_.getEnemyBullet().最大数_; i++)
+		{
+			data.push_back(弾丸_.getEnemyBullet().データ配列_[i].位置);
+		}
+		return data;
 	}
 }
