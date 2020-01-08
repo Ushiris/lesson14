@@ -2,6 +2,7 @@
 #include <vector>
 #include "共通.h"
 
+
 namespace エンジン {
 
 	class 弾丸サービス;

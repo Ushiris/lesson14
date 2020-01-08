@@ -110,6 +110,31 @@ namespace エンジン
 		void 更新(float 経過時間) {};
 	};
 
+	class CircleTrigger final : public コンポーネント
+	{
+	private:
+		TCHAR* 名前_ = L"CircleTrigger";
+		static std::vector<CircleTrigger*> collider;
+		int layer = 0;
+		float2 *pos;
+		int r = 1;
+		bool isBullet = false;
+
+	public:
+		CircleTrigger(エンティティ& 親) : コンポーネント(親) { collider.push_back(this); }
+		~CircleTrigger() {}
+
+		void 更新(float 経過時間);
+
+		float2 getPos();
+		int getR();
+		void ChengeLayer(int NewLayer);
+		void setBulletMode(float2 *pos);
+
+		bool collision(CircleTrigger another);
+		bool isCollision();
+	};
+
 	class 弾丸コンポーネント final : public コンポーネント
 	{
 	private:
@@ -125,27 +150,6 @@ namespace エンジン
 		void 更新(float 経過時間) {};
 	};
 
-	class CircleTrigger final : public コンポーネント
-	{
-	private:
-		TCHAR* 名前_ = L"CircleTrigger";
-		static std::vector<CircleTrigger*> collider;
-		int layer = 0;
-		float2 pos = { 0,0 };
-		int r = 1;
-
-	public:
-		CircleTrigger(エンティティ& 親) : コンポーネント(親) { collider.push_back(this); }
-		~CircleTrigger() {}
-
-		void 更新(float 経過時間);
-
-		float2 getPos();
-		int getR();
-
-		bool collision(CircleTrigger another);
-		bool isCollision();
-	};
 
 
 	/////////////////////////////////////////////////////
@@ -196,6 +200,8 @@ namespace エンジン
 		スプライトコンポーネント* スプライト_;
 		入力コンポーネント* 入力_;
 		弾丸コンポーネント* 弾丸_;
+		CircleTrigger* collider_;
+
 	public:
 		プレイヤー・エンティティ();
 		~プレイヤー・エンティティ();

@@ -226,11 +226,25 @@ namespace エンジン
 
 	float2 CircleTrigger::getPos()
 	{
+		if (isBullet)
+		{
+			return *pos;
+		}
+
 		return 親_.位置取得();
 	}
 	int CircleTrigger::getR()
 	{
 		return r;
+	}
+	void CircleTrigger::ChengeLayer(int NewLayer)
+	{
+		layer = NewLayer;
+	}
+	void CircleTrigger::setBulletMode(float2 * NewPos)
+	{
+		isBullet = true;
+		pos = NewPos;
 	}
 	bool CircleTrigger::collision(CircleTrigger another)
 	{
@@ -250,7 +264,7 @@ namespace エンジン
 	{
 		for (auto another : collider)
 		{
-			if (collision(*another))
+			if (collision(*another)||another->layer!=layer)
 			{
 				return true;
 			}

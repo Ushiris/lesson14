@@ -44,6 +44,13 @@ namespace エンジン
 
 		弾丸_ = dynamic_cast<弾丸コンポーネント*>(コンポーネント::コンポーネント生成(L"弾丸コンポーネント", *this));
 		追加(弾丸_);
+
+		
+
+		collider_ = dynamic_cast<CircleTrigger*>(コンポーネント::コンポーネント生成(L"CircleTrigger", *this));
+		追加(collider_);
+		collider_->ChengeLayer(1);
+
 	}
 
 	プレイヤー・エンティティ::~プレイヤー・エンティティ()
@@ -76,6 +83,9 @@ namespace エンジン
 		// 撃つ
 		if (入力.押し下げ & 入力サービス::マスク_ショット) {
 			弾丸_->追加(弾丸サービス::種類::自弾, this->位置_, this->位置_);// 速度にダミーで位置を入れた
+			CircleTrigger *temp = dynamic_cast<CircleTrigger*>(コンポーネント::コンポーネント生成(L"CircleTrigger", *this));
+			追加(temp);
+			temp->setBulletMode(&位置_);
 		}
 	}
 
@@ -97,6 +107,7 @@ namespace エンジン
 		追加(スプライト_);
 
 		追加(dynamic_cast<弾丸コンポーネント*>(コンポーネント::コンポーネント生成(L"弾丸コンポーネント", *this)));
+		追加(dynamic_cast<CircleTrigger*>(コンポーネント::コンポーネント生成(L"CircleTrigger", *this)));
 	}
 
 	void ザコ１・エンティティ::更新(float 経過時間)
@@ -121,7 +132,11 @@ namespace エンジン
 			float2 速度 = プレイヤー->位置取得() - 位置_;
 			速度 = 速度.正規化() * 100.0f;
 			弾丸コンポーネント* 弾丸 = dynamic_cast<弾丸コンポーネント*>(this->コンポーネント検索(L"弾丸コンポーネント"));
-			弾丸->追加(弾丸サービス::種類::敵弾, this->位置_, 速度);// 速度にダミーで位置を入れた
+			弾丸->追加(弾丸サービス::種類::敵弾, this->位置_, 速度);
+			CircleTrigger *temp = dynamic_cast<CircleTrigger*>(コンポーネント::コンポーネント生成(L"CircleTrigger", *this));
+			追加(temp);
+			temp->setBulletMode(&位置_);
+
 		}
 	}
 
